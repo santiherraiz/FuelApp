@@ -16,7 +16,7 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(drawer)" />
       </Stack>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
     </QueryClientProvider>
   );
 }
