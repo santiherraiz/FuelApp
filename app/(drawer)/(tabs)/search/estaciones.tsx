@@ -1,6 +1,6 @@
-import { EstacionList } from '@/src/api/types';
-import { Card } from '@/src/components/Card';
-import { useEstacionesScreen } from '@/src/hooks/useEstaciones';
+import { EstacionList } from '@/api/types';
+import { Card } from '@/components/Card';
+import { useEstacionesScreen } from '@/hooks/useEstaciones';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';

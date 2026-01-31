@@ -1,4 +1,4 @@
-import { getEstacionDetalle, getHistoricoEstacion } from '@/src/api/fuelApi';
+import { getEstacionDetalleAction, getHistoricoEstacionAction } from '@/core/actions/estaciones.action';
 import { useQuery } from '@tanstack/react-query';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
@@ -20,14 +20,16 @@ export const useStationDetailsScreen = () => {
 
     const { data: station, isLoading: loadingStation, error: stationError } = useQuery({
         queryKey: ['station', id],
-        queryFn: () => getEstacionDetalle(Number(id!)),
-        enabled: !!id
+        queryFn: () => getEstacionDetalleAction(Number(id!)),
+        enabled: !!id,
+        staleTime: 1000 * 60 * 60 * 24
     });
 
     const { data: history, isLoading: loadingHistory, error: historyError } = useQuery({
         queryKey: ['history', id],
-        queryFn: () => getHistoricoEstacion(Number(id!)),
-        enabled: !!id
+        queryFn: () => getHistoricoEstacionAction(Number(id!)),
+        enabled: !!id,
+        staleTime: 1000 * 60 * 60 * 24
     });
 
     const isLoading = loadingStation || loadingHistory;

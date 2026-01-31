@@ -1,4 +1,4 @@
-import { useStationDetailsScreen } from '@/src/hooks/useStationDetails';
+import { useStationDetailsScreen } from '@/hooks/useStationDetails';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { ActivityIndicator, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
@@ -63,17 +63,34 @@ export default function StationDetailsScreen() {
 
                 {/* Features / Prices Section */}
                 <View className="mb-6">
-                    <Text className="text-lg font-black text-primary mb-4 uppercase tracking-tighter">Resumen de Precios</Text>
+                    <Text className="text-lg font-black text-primary mb-4 uppercase tracking-tighter">Precios Actuales</Text>
 
+                    <View className="bg-surface rounded-3xl p-6 border border-slate-50 shadow-sm mb-6" style={{ elevation: 2 }}>
+                        {station.precios && station.precios.length > 0 ? (
+                            station.precios.map((precio, index) => (
+                                <View key={index} className="flex-row justify-between items-center mb-4 last:mb-0">
+                                    <Text className="text-text-primary font-bold">{precio.tipo}</Text>
+                                    <View className="flex-row items-baseline bg-primary/10 px-3 py-1.5 rounded-xl">
+                                        <Text className="text-lg font-black text-primary">{precio.precio.toFixed(3)}</Text>
+                                        <Text className="text-[10px] text-text-tertiary ml-1 font-bold">€/L</Text>
+                                    </View>
+                                </View>
+                            ))
+                        ) : (
+                            <Text className="text-text-secondary text-center">No hay información de precios disponible.</Text>
+                        )}
+                    </View>
+
+                    <Text className="text-lg font-black text-primary mb-4 uppercase tracking-tighter">Historial Reciente</Text>
                     <View className="bg-surface rounded-3xl p-6 border border-slate-50 shadow-sm" style={{ elevation: 2 }}>
                         <View className="flex-row items-center justify-between mb-6 border-b border-slate-50 pb-4">
                             <View className="flex-row items-center">
                                 <View className="w-10 h-10 rounded-full bg-emerald-50 items-center justify-center mr-3">
                                     <Ionicons name="trending-up" size={20} color="#10B981" />
                                 </View>
-                                <Text className="text-text-primary font-bold">Historial Reciente</Text>
+                                <Text className="text-text-primary font-bold">Historial</Text>
                             </View>
-                            <Text className="text-[10px] text-text-tertiary font-bold uppercase tracking-widest">Actualizado hoy</Text>
+                            <Text className="text-[10px] text-text-tertiary font-bold uppercase tracking-widest">Últimos datos</Text>
                         </View>
 
                         {history && history.data && history.data.length > 0 ? (

@@ -1,4 +1,4 @@
-import { getProvincias } from '@/src/api/fuelApi';
+import { getProvinciasAction } from '@/core/actions/provincias.action';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import { Provincia } from '../api/types';
@@ -6,7 +6,8 @@ import { Provincia } from '../api/types';
 export const useProvincias = () => {
     return useQuery({
         queryKey: ['provincias'],
-        queryFn: getProvincias
+        queryFn: getProvinciasAction,
+        staleTime: 1000 * 60 * 60 * 24
     });
 };
 

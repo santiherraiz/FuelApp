@@ -17,8 +17,8 @@ export interface CombustiblePrecio {
 
 export interface Estacion {
     // Common fields
-    idEstacion?: number; // Might vary between endpoints, keeping optional or unifying
-    nombre?: string; // /estaciones/cerca uses nombreEstacion
+    idEstacion: number;
+    nombre: string;
     direccion: string;
     latitud: number;
     longitud: number;
@@ -60,8 +60,7 @@ export interface EstacionDetalle {
     direccion: string;
     latitud: number;
     longitud: number;
-    // Note: Detailed endpoint doesn't show prices in the usage example, 
-    // but usually details include them. Will keep optional.
+    precios?: CombustiblePrecio[];
 }
 
 export interface HistoricoItem {

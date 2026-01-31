@@ -1,4 +1,4 @@
-import { getEstacionesByMunicipio } from '@/src/api/fuelApi';
+import { getEstacionesByMunicipioAction } from '@/core/actions/estaciones.action';
 import { useQuery } from '@tanstack/react-query';
 import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import { useEffect } from 'react';
@@ -7,8 +7,9 @@ import { EstacionList } from '../api/types';
 export const useEstaciones = (idMunicipio: string | number | null | undefined) => {
     return useQuery({
         queryKey: ['estaciones', idMunicipio],
-        queryFn: () => getEstacionesByMunicipio(Number(idMunicipio)),
-        enabled: !!idMunicipio
+        queryFn: () => getEstacionesByMunicipioAction(Number(idMunicipio)),
+        enabled: !!idMunicipio,
+        staleTime: 1000 * 60 * 60 * 24
     });
 };
 

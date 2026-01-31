@@ -1,5 +1,5 @@
-import { Card } from '@/src/components/Card';
-import { useMunicipiosScreen } from '@/src/hooks/useMunicipios';
+import { Card } from '@/components/Card';
+import { useMunicipiosScreen } from '@/hooks/useMunicipios';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';

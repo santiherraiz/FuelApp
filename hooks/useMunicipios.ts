@@ -1,4 +1,4 @@
-import { getMunicipiosByProvincia } from '@/src/api/fuelApi';
+import { getMunicipiosByProvinciaAction } from '@/core/actions/municipios.action';
 import { useQuery } from '@tanstack/react-query';
 import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import { useEffect } from 'react';
@@ -7,8 +7,9 @@ import { Municipio } from '../api/types';
 export const useMunicipios = (idProvincia: string | number | null | undefined) => {
     return useQuery({
         queryKey: ['municipios', idProvincia],
-        queryFn: () => getMunicipiosByProvincia(Number(idProvincia)),
-        enabled: !!idProvincia
+        queryFn: () => getMunicipiosByProvinciaAction(Number(idProvincia)),
+        enabled: !!idProvincia,
+        staleTime: 1000 * 60 * 60 * 24
     });
 };
 

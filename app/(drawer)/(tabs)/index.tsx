@@ -1,4 +1,4 @@
-import { usePermissionStore } from '@/src/store/usePermissionStore';
+import { usePermissionStore } from '@/store/usePermissionStore';
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
