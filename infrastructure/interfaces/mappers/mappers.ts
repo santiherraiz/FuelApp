@@ -7,8 +7,8 @@ export class EstacionMapper {
             idEstacion: respuesta.idEstacion,
             nombre: respuesta.nombreEstacion,
             direccion: respuesta.direccion,
-            latitud: Number(respuesta.latitud),
-            longitud: Number(respuesta.longitud),
+            latitud: respuesta.latitud,
+            longitud: respuesta.longitud,
             distancia: respuesta.distancia,
         };
     }
@@ -18,8 +18,8 @@ export class EstacionMapper {
             idEstacion: respuesta.idEstacion,
             nombre: respuesta.nombreEstacion,
             direccion: respuesta.direccion,
-            latitud: Number(respuesta.latitud),
-            longitud: Number(respuesta.longitud),
+            latitud: respuesta.latitud,
+            longitud: respuesta.longitud,
             precios: [
                 { tipo: 'Gasolina 95', precio: Number(respuesta.Gasolina95) || 0 },
                 { tipo: 'Gasolina 98', precio: Number(respuesta.Gasolina98) || 0 },

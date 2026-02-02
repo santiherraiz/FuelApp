@@ -2,16 +2,16 @@ export interface EstacionCercanaResponse {
     idEstacion: number;
     nombreEstacion: string;
     direccion: string;
-    latitud: string;
-    longitud: string;
+    latitud: number;
+    longitud: number;
     distancia: number;
 }
 
 export interface DetalleEstacionResponse {
     idEstacion: number;
     nombreEstacion: string;
-    longitud: string;
-    latitud: string;
+    longitud: number;
+    latitud: number;
     margen: string;
     codPostal: string;
     direccion: string;
