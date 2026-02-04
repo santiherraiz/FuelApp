@@ -63,12 +63,11 @@ export interface HistoricoResponse {
 }
 
 export interface EstacionRadioResponse {
-    _id: string;
-    nombre: string;
-    coordenadas: {
-        type: string;
-        coordinates: [number, number]; // [longitude, latitude]
-    };
+    idEstacion: number;
+    nombreEstacion: string;
+    direccion: string;
+    latitud: number;
+    longitud: number;
     distancia: number;
     provincia: string;
     localidad: string;

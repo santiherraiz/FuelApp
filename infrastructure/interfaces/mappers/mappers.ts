@@ -57,11 +57,11 @@ export class EstacionMapper {
 
     static estacionRadioMapper(respuesta: EstacionRadioResponse): Estacion {
         return {
-            idEstacion: 0, // No proporcionado en la respuesta de radio
-            nombre: respuesta.nombre,
-            direccion: respuesta.localidad,
-            latitud: respuesta.coordenadas.coordinates[1],
-            longitud: respuesta.coordenadas.coordinates[0],
+            idEstacion: respuesta.idEstacion,
+            nombre: respuesta.nombreEstacion,
+            direccion: respuesta.direccion,
+            latitud: respuesta.latitud,
+            longitud: respuesta.longitud,
             distancia: respuesta.distancia,
             provincia: respuesta.provincia,
             localidad: respuesta.localidad,

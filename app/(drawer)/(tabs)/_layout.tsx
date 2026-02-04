@@ -23,28 +23,20 @@ export default function TabLayout() {
           default: {},
         }),
       }}>
+
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Inicio',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Mapa',
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="map" color={color} />,
         }}
       />
 
       <Tabs.Screen
         name="search"
         options={{
-          href: null,
           title: 'Buscar',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-
-      <Tabs.Screen
-        name="mapa"
-        options={{
-          title: 'Mapa Radio',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name="map" color={color} />,
         }}
       />
     </Tabs>

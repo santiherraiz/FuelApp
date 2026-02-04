@@ -81,7 +81,7 @@ export const getEstacionesPorRadioAction = async (
         const { data } = await client.get<EstacionRadioResponse[]>(
             "/estaciones/radio",
             {
-                params: { lat, lng, radio },
+                params: { latitud: lat, longitud: lng, radio, limite: 100 },
             }
         );
         const estaciones = data.map((estacion) =>
