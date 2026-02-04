@@ -1,6 +1,6 @@
 import { usePermissionStore } from '@/store/usePermissionStore';
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 export default function MapScreen() {
@@ -25,7 +25,7 @@ export default function MapScreen() {
   }
 
   return (
-    <View className="flex-1">
+    <SafeAreaView className="flex-1">
       <MapView
         provider={PROVIDER_GOOGLE}
         style={StyleSheet.absoluteFill}
@@ -37,8 +37,8 @@ export default function MapScreen() {
           longitudeDelta: 0.0421,
         }}
       >
-        {/* Markers for stations will go here */}
+        {/* Los markers de las estaciones irán aquí */}
       </MapView>
-    </View>
+    </SafeAreaView>
   );
 }

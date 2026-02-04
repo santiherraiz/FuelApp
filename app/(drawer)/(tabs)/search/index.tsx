@@ -38,7 +38,7 @@ export default function ProvinciasScreen() {
                 ListHeaderComponent={() => (
                     <View className="px-5 pt-8 pb-4">
                         <Text className="text-3xl font-extrabold text-primary tracking-tight">
-                            Encuentra Gasolina
+                            Encuentra gasolineras
                         </Text>
                         <Text className="text-text-secondary text-base mt-1">
                             Selecciona una provincia para explorar estaciones de servicio.

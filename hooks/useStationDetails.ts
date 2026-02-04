@@ -25,15 +25,20 @@ export const useStationDetailsScreen = () => {
         staleTime: 1000 * 60 * 60 * 24
     });
 
+    // Calculate dates for history (last 30 days)
+    const today = new Date();
+    const endDate = today.getDate();
+    const startDate = today.getDate() - 30;
+
     const { data: history, isLoading: loadingHistory, error: historyError } = useQuery({
-        queryKey: ['history', id],
-        queryFn: () => getHistoricoEstacionAction(Number(id!)),
+        queryKey: ['history', id, startDate, endDate],
+        queryFn: () => getHistoricoEstacionAction(Number(id!), startDate.toString(), endDate.toString()),
         enabled: !!id,
         staleTime: 1000 * 60 * 60 * 24
     });
 
     const isLoading = loadingStation || loadingHistory;
-    const error = stationError || historyError;
+    const error = stationError;
 
     return {
         station,

@@ -35,10 +35,20 @@ export const getEstacionDetalleAction = async (idEstacion: number) => {
     }
 };
 
-export const getHistoricoEstacionAction = async (idEstacion: number) => {
+export const getHistoricoEstacionAction = async (
+    idEstacion: number,
+    fechaInicio: string,
+    fechaFin: string
+) => {
     try {
         const { data } = await client.get<HistoricoResponse>(
-            `/estaciones/historico/${idEstacion}`
+            `/estaciones/historico/${idEstacion}`,
+            {
+                params: {
+                    fechaInicio,
+                    fechaFin,
+                },
+            }
         );
         return EstacionMapper.historicoMapper(data);
     } catch (error) {
