@@ -1,10 +1,28 @@
 import { useStationDetailsScreen } from '@/hooks/useStationDetails';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { ActivityIndicator, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, Linking, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 export default function StationDetailsScreen() {
-    const { station, history, isLoading, error } = useStationDetailsScreen();
+    const { station, isLoading, error } = useStationDetailsScreen();
+
+    const handleOpenMap = () => {
+        if (!station) return;
+
+        const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
+        const latLng = `${station.latitud},${station.longitud}`;
+        const label = station.nombre;
+        const url = Platform.select({
+            ios: `${scheme}${label}@${latLng}`,
+            android: `${scheme}${latLng}(${label})`
+        });
+
+        if (url) {
+            Linking.openURL(url).catch((err) =>
+                console.error("Error al abrir el mapa:", err)
+            );
+        }
+    };
 
     if (isLoading) {
         return (
@@ -27,7 +45,6 @@ export default function StationDetailsScreen() {
 
     return (
         <ScrollView className="flex-1 bg-background" bounces={false}>
-            {/* Header Content */}
             <View className="relative">
                 <Image
                     source={{ uri: 'https://images.unsplash.com/photo-1545147980-c994176e6f8a?q=80&w=400&h=300&auto=format&fit=crop' }}
@@ -49,10 +66,12 @@ export default function StationDetailsScreen() {
                 </View>
             </View>
 
-            {/* Interaction Layer */}
             <View className="p-5 -mt-8 bg-background rounded-t-[32px] shadow-2xl">
                 <View className="flex-row justify-between mb-8">
-                    <TouchableOpacity className="flex-1 bg-primary h-14 rounded-2xl mr-2 flex-row items-center justify-center shadow-lg active:scale-95 transition-transform">
+                    <TouchableOpacity
+                        onPress={handleOpenMap}
+                        className="flex-1 bg-primary h-14 rounded-2xl mr-2 flex-row items-center justify-center shadow-lg"
+                    >
                         <Ionicons name="map" size={22} color="white" />
                         <Text className="text-white font-black ml-2 uppercase text-xs">Cómo llegar</Text>
                     </TouchableOpacity>
@@ -61,7 +80,6 @@ export default function StationDetailsScreen() {
                     </TouchableOpacity>
                 </View>
 
-                {/* Features / Prices Section */}
                 <View className="mb-6">
                     <Text className="text-lg font-black text-primary mb-4 uppercase tracking-tighter">Precios Actuales</Text>
 
@@ -80,50 +98,8 @@ export default function StationDetailsScreen() {
                             <Text className="text-text-secondary text-center">No hay información de precios disponible.</Text>
                         )}
                     </View>
-
-                    <Text className="text-lg font-black text-primary mb-4 uppercase tracking-tighter">Historial Reciente</Text>
-                    <View className="bg-surface rounded-3xl p-6 border border-slate-50 shadow-sm" style={{ elevation: 2 }}>
-                        <View className="flex-row items-center justify-between mb-6 border-b border-slate-50 pb-4">
-                            <View className="flex-row items-center">
-                                <View className="w-10 h-10 rounded-full bg-emerald-50 items-center justify-center mr-3">
-                                    <Ionicons name="trending-up" size={20} color="#10B981" />
-                                </View>
-                                <Text className="text-text-primary font-bold">Historial</Text>
-                            </View>
-                            <Text className="text-[10px] text-text-tertiary font-bold uppercase tracking-widest">Últimos datos</Text>
-                        </View>
-
-                        {history && history.data && history.data.length > 0 ? (
-                            <View>
-                                {history.data.slice(0, 5).map((h, index) => (
-                                    <View
-                                        key={index}
-                                        className="flex-row justify-between items-center mb-4 last:mb-0"
-                                    >
-                                        <View>
-                                            <Text className="text-text-secondary font-bold text-xs">
-                                                {new Date(h.timestamp).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}
-                                            </Text>
-                                        </View>
-                                        <View className="flex-row items-baseline bg-slate-50 px-3 py-1.5 rounded-xl">
-                                            <Text className="text-lg font-black text-primary">{h.price.toFixed(3)}</Text>
-                                            <Text className="text-[10px] text-text-tertiary ml-1 font-bold">€/L</Text>
-                                        </View>
-                                    </View>
-                                ))}
-                            </View>
-                        ) : (
-                            <View className="py-10 items-center">
-                                <View className="w-16 h-16 bg-slate-50 rounded-full items-center justify-center mb-3">
-                                    <Ionicons name="stats-chart-outline" size={32} color="#CBD5E1" />
-                                </View>
-                                <Text className="text-text-tertiary font-medium">No hay datos históricos para esta estación.</Text>
-                            </View>
-                        )}
-                    </View>
                 </View>
 
-                {/* Additional Info */}
                 <View className="bg-slate-900 rounded-3xl p-8 mb-10 overflow-hidden relative">
                     <View className="relative z-10">
                         <Text className="text-white text-xl font-black uppercase tracking-tighter mb-2">Información de Localización</Text>

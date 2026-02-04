@@ -50,7 +50,7 @@ export class EstacionMapper {
                 id: item.id,
                 idEstacion: item.idEstacion,
                 timestamp: item.timestamp,
-                price: item.price
+                price: item.price || 0
             }))
         };
     }
