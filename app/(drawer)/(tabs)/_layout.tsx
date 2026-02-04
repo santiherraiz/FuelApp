@@ -1,46 +1,52 @@
-import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Platform, useColorScheme } from 'react-native';
+
+import { HapticTab } from '@/components/haptic-tab';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Colors } from '@/constants/theme';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function TabLayout() {
+  const colorScheme = useColorScheme();
 
   return (
-    <SafeAreaProvider>
-      <Tabs
-        screenOptions={{
-          headerShown: false,
-          tabBarActiveTintColor: '#3B82F6',
-          tabBarInactiveTintColor: '#94A3B8',
-          tabBarStyle: {
-            backgroundColor: '#FFFFFF',
-            borderTopWidth: 1,
-            borderTopColor: '#F1F5F9',
-            height: 100,
-            paddingBottom: 8,
-            paddingTop: 8,
-            ...Platform.select({
-              ios: { position: 'absolute' },
-              default: {},
-            }),
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        headerShown: false,
+        tabBarButton: HapticTab,
+        tabBarStyle: Platform.select({
+          ios: {
+            position: 'absolute',
           },
-        }}>
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: 'Mapa',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="map.fill" color={color} />,
-          }}
-        />
-        <Tabs.Screen
-          name="search"
-          options={{
-            title: 'Buscar',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="magnifyingglass" color={color} />,
-          }}
-        />
-      </Tabs>
-    </SafeAreaProvider>
+          default: {},
+        }),
+      }}>
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Inicio',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+        }}
+      />
+
+      <Tabs.Screen
+        name="search"
+        options={{
+          href: null,
+          title: 'Buscar',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+        }}
+      />
+
+      <Tabs.Screen
+        name="mapa"
+        options={{
+          title: 'Mapa Radio',
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="map" color={color} />,
+        }}
+      />
+    </Tabs>
   );
 }
